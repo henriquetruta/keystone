@@ -261,11 +261,14 @@ class Enforcer(object):
 
         # Allow the rule to be a Check tree
         if isinstance(rule, BaseCheck):
+            LOG.debug(_("Entrou no IF"))
             result = rule(target, creds, self)
         elif not self.rules:
             # No rules to reference means we're going to fail closed
+            LOG.debug(_("Entrou no ELIF"))
             result = False
         else:
+            LOG.debug(_("Entrou no ELSE"))
             try:
                 # Evaluate the rule
                 result = self.rules[rule](target, creds, self)
@@ -275,7 +278,9 @@ class Enforcer(object):
                 result = False
 
         # If it is False, raise the exception if requested
+        LOG.debug(_("PASSOU"))
         if do_raise and not result:
+            LOG.debug(_("DO_RAISE exc %s" % exc))
             if exc:
                 raise exc(*args, **kwargs)
 

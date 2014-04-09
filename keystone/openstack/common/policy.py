@@ -272,8 +272,8 @@ class Enforcer(object):
             try:
                 # Evaluate the rule
                 result = self.rules[rule](target, creds, self)
-                LOG.debug(_("target %s" % target))
                 LOG.debug(_("creds %s" % creds))
+                LOG.debug(_("target %s" % target))
             except KeyError:
                 LOG.debug(_("Rule [%s] doesn't exist") % rule)
                 # If the rule doesn't exist, fail closed

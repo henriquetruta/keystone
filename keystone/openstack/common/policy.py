@@ -268,10 +268,12 @@ class Enforcer(object):
             LOG.debug(_("Entrou no ELIF"))
             result = False
         else:
-            LOG.debug(_("Entrou no ELSE"))
+            LOG.debug(_("Entrou no ELSE para rule %s" % rule))
             try:
                 # Evaluate the rule
                 result = self.rules[rule](target, creds, self)
+                LOG.debug(_("target %s" % target))
+                LOG.debug(_("creds %s" % creds))
             except KeyError:
                 LOG.debug(_("Rule [%s] doesn't exist") % rule)
                 # If the rule doesn't exist, fail closed
